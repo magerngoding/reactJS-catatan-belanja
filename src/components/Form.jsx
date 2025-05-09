@@ -7,9 +7,15 @@ export default function Form({ onAddItem }) {
     function handleSubmit(e) {
         e.preventDefault(); // fungi dimatikan agar diURL tidak ada tanda (?)
 
-        if (!name) return; // jika nama kosong keluar dari function
+        // Guard Clause = jika nama kosong keluar dari function
+        if (!name) return; // !name not namae / false = kosong
 
-        const newItem = { name, quantity, checked: false, id: Date.now() };
+        const newItem = {
+            name,
+            quantity,
+            checked: false,
+            id: Date.now()
+        };
         onAddItem(newItem);
 
         console.log(newItem);
@@ -28,8 +34,8 @@ export default function Form({ onAddItem }) {
         <form className="add-form" onSubmit={handleSubmit}>
             <h3>Hari ini belanja apa kita?</h3>
             <div>
-
                 <select value={quantity}
+                    // set quantity dipaksa ke NUMBER()
                     onChange={(e) => setQuantity(Number(e.target.value))}>
                     {quantityNum}
                 </select>
